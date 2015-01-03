@@ -1,10 +1,10 @@
 ---
 layout: post
-title: You're up and running!
+title: How to retrieve the address of where selected photo was taken?
 ---
 The purpose of this block of code is to print to the console the city and region where the photo, selected via standard ios image picker controller, was taken.
 
-In this example I used ALAssets
+In this example I used ALAssets from AssetsLibrary. 
 
 {% highlight swift linenos %}
 //UIImagePickerControllerDelegate Methods
