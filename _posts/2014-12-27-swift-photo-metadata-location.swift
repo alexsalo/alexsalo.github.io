@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to retrieve the address of where selected photo was taken?
+title: Get location of selected photo Swift
 ---
 The purpose of this block of code is to print to the console the city and region where the photo, selected via standard ios image picker controller, was taken.
 
