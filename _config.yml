@@ -19,18 +19,18 @@ avatar: http://www.gravatar.com/avatar/8db82a724d6ca7d70233dd96aa156673.png
 footer-links:
   dribbble: 
   email: 
-  facebook: 
+  facebook: alexsalovrn
   flickr: 
-  github: barryclark/jekyll-now
-  instagram: 
+  github: alexsalo
+  instagram: alexsalovrn
   linkedin: 
   pinterest: 
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
-  twitter: jekyllrb
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
+  twitter: alexsalovrn
+  stackoverflow: users/1058136/alexsalo # your stackoverflow profile, e.g. "users/50476/bart-kiers"
 
 # Your disqus shortname, entering this will enable commenting on posts
-disqus: alexsalo
+disqus: alexsalovrn
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics: 
