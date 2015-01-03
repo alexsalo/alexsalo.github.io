@@ -2,9 +2,9 @@
 layout: post
 title: Get location of selected photo Swift
 ---
-The purpose of this block of code is to print to the console the city and region where the photo, selected via standard ios image picker controller, was taken.
+The purpose of this block of code is to print to the console the city and region where the photo, selected via standard ios image picker controller, was taken.  
 
-In this example I used ALAssets from AssetsLibrary. 
+In this example I used ALAssets from AssetsLibrary.  
 
 {% highlight swift linenos %}
 //UIImagePickerControllerDelegate Methods
