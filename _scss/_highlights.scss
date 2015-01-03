@@ -1,7 +1,19 @@
-
 /***********************/
 /* SYNTAX HIGHLIGHTING */
 /***********************/
+
+.highlight { 
+  background-color: $darkerGray;
+  padding: 5px 10px;
+  margin: 20px 0;
+}
+ 
+code {
+  font-family: 'Courier', monospace;
+  font-size: 14px;
+  color: #999
+}
+
 .highlight  { background: #ffffff; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
 .highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
