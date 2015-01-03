@@ -4,7 +4,7 @@ title: You're up and running!
 ---
 The purpose of this block of code is to print to the console the city and region where the photo, selected via standard ios image picker controller, was taken.
 In this example I used ALAssets
-{% highlight haskell linenos %}
+{% highlight java linenos %}
 //UIImagePickerControllerDelegate Methods
 func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary!){
     let library = ALAssetsLibrary()
