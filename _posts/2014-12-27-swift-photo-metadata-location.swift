@@ -6,7 +6,7 @@ The purpose of this block of code is to print to the console the city and region
 
 In this example I used ALAssets
 
-{% highlight haskell linenos %}
+{% highlight swift linenos %}
 //UIImagePickerControllerDelegate Methods
 func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: NSDictionary!){
     let library = ALAssetsLibrary()
