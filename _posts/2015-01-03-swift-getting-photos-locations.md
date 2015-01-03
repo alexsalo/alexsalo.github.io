@@ -3,9 +3,9 @@ layout: post
 title: Get location of selected photo Swift
 ---
 
-In the previos post I tried to access location data using AssetsLibrary. However this method is depreciated, today we will try to use PHAsset fro, Photos framework
+In the previos post I tried to access location data using AssetsLibrary. However this method is depreciated, today we will try to use PHAsset from Photos framework
 
-So the code of block below retrieves all the assets of type .Image and prints location info if available
+So the code of block below retrieves all the assets of type. Image and prints location info if available
 
 
 {% highlight swift linenos %}
