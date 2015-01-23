@@ -4,9 +4,13 @@ title: Mergesort in python
 ---
 
 Time complexity: O(n*log(n)) for any case. 
+
 The idea is really simpe and adheres 'devide and conquer' paradigm:
-* divide on halves until get list with length equal 1 //just a recursive calls
-* merge recursively // takes log(n) merges with n comparison in each
+
+{% highlight python linenos %}
+divide on halves until get list with length equal 1 %just a recursive calls
+merge recursively % takes log(n) merges with n comparison in each
+{% highlight python linenos %}
 
 Writing it in python takes only few lines:
 
