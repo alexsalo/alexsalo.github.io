@@ -24,7 +24,7 @@ footer-links:
   github: alexsalo
   instagram: alexsalovrn
   linkedin: alexsalo
-  pinterest: 
+  pinterest:  
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
   twitter: alexsalovrn
   stackoverflow: users/1058136/alexsalo # your stackoverflow profile, e.g. "users/50476/bart-kiers"
@@ -46,7 +46,7 @@ url: devnotes.alexsalo.ru
 baseurl: ""
 
 #
-# !! You don't need to change any of the configuration flags below !!
+# !! You don't need to change any of the configuration flags below !!!
 #
 
 markdown: kramdown
