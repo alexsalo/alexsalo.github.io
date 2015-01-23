@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mergesort in python
+title: Merge Sort in Python
 ---
 
 Time complexity: O(n*log(n)) for any case. 
