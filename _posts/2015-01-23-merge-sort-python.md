@@ -10,7 +10,7 @@ The idea is really simpe and adheres 'devide and conquer' paradigm:
 {% highlight python linenos %}
 divide on halves until get list with length equal 1 %just a recursive calls
 merge recursively % takes log(n) merges with n comparison in each
-{% highlight python linenos %}
+{% endhighlight %}
 
 Writing it in python takes only few lines:
 
