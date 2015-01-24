@@ -5,12 +5,10 @@ title: Merge Sort in Python
 
 Time complexity: O(n*log(n)) for any case. 
 
-The idea is really simpe and adheres 'devide and conquer' paradigm:
+The idea is really simpe and adheres 'divide and conquer' paradigm:
 
-{% highlight python linenos %}
-divide on halves until get list with length equal 1 %just a recursive calls
-merge recursively % takes log(n) merges with n comparison in each
-{% endhighlight %}
+1. divide on halves until get list with length equal 1 //just a recursive calls
+2. merge recursively // takes log(n) merges with n comparison in each
 
 Writing it in python takes only few lines:
 
