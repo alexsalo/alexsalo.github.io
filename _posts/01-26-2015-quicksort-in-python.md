@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Merge Sort in Python
+title: Quicksort in Python
 ---
 
 Time complexity: O(n*log(n)) for average case. Worst case O(n^2). Usually better than other n*log(n). 
