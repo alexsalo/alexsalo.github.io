@@ -10,16 +10,7 @@ GDA is an example of generative learining. It works very simple:
 4. For new data example we calculate the likelihood of belonging to each of the classes
 5. Finally, we choose the maximimum likelihood to predict the class.
 
-* kram
-+ down
-- now
-
-1. kram
-2. down
-3. now
-
 Here is the simplyfied code for Matlab:
-
 
 {% highlight matlab linenos %}
 function gda()
