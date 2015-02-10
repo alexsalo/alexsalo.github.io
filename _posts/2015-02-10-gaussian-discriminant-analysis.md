@@ -3,6 +3,7 @@ layout: post
 title: Gaussian Discriminant Analysis
 ---
 GDA is an example of generative learining. It works very simple:
+
 1. We make assumption about the type of distributions of our data - in given example: Normal Distribution
 2. For each class we learn (on training data) the parametrs of distribution: mu, sd
 3. We model each class' distribution via Likelihood
