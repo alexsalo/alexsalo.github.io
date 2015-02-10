@@ -10,7 +10,9 @@ GDA is an example of generative learining. It works very simple:
 * Finally, we choose the maximimum likelihood to predict the class.
 
 Here is the simplyfied code for Matlab:
-{% highlight mathlab linenos %}
+
+
+{% highlight matlab linenos %}
 function gda()
     train_data = load('vowel.train');
 
