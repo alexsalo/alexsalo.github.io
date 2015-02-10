@@ -3,11 +3,11 @@ layout: post
 title: Gaussian Discriminant Analysis
 ---
 GDA is an example of generative learining. It works very simple:
-* We make assumption about the type of distributions of our data - in given example: Normal Distribution
-* For each class we learn (on training data) the parametrs of distribution: mu, sd
-* We model each class' distribution via Likelihood
-* For new data example we calculate the likelihood of belonging to each of the classes
-* Finally, we choose the maximimum likelihood to predict the class.
+1. We make assumption about the type of distributions of our data - in given example: Normal Distribution
+2. For each class we learn (on training data) the parametrs of distribution: mu, sd
+3. We model each class' distribution via Likelihood
+4. For new data example we calculate the likelihood of belonging to each of the classes
+5. Finally, we choose the maximimum likelihood to predict the class.
 
 Here is the simplyfied code for Matlab:
 
