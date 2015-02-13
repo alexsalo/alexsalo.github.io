@@ -3,7 +3,7 @@ layout: post
 title: Quicksort in Java
 ---
 
-I started to love quick sort. The reason being...it quick! 
+I started to love quick sort. The reason being...it's quick! 
 Quick to code, quick to sort. Easy to understand. So.. here it is in Java.
 
 {% highlight java linenos %}
