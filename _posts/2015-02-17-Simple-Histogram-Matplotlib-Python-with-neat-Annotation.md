@@ -35,3 +35,5 @@ ax.text(0.65, 0.95, textstr, transform=ax.transAxes, fontsize=14,
 pylab.show()
 {% endhighlight %}
 
+Which produces this:
+![Histogram]({{ site.url }}/images/nums2.png)
