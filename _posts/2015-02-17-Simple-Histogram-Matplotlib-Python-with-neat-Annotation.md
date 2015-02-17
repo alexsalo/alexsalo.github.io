@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Simple Histogram in Python Matplotlib with neat Annotation
+title: Simple Histogram in Python Matplotlib
 ---
 So matplotlib is really neat and powerful yet elegant and easy to use. 
 Here we have this simple hist with all you need:
@@ -36,4 +36,4 @@ pylab.show()
 {% endhighlight %}
 
 Which produces this:
-![Histogram]({{ site.url }}/images/nums2.png)
+![Histogram]({{ site.baseurl }}/images/nums2.png)
