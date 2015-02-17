@@ -37,3 +37,5 @@ pylab.show()
 
 Which produces this:
 ![Histogram]({{ site.baseurl }}/images/nums2.png)
+
+PS nums.txt it's just a file with numbers.
