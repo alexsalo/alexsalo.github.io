@@ -154,7 +154,7 @@ public class Maze_solver {
     		    return new_coord;
     		}
     	}  		        
-        return null; //shouldn't happen by assumption
+        return null; //shouldnt happen by assumption
     }
     
     static coord findStart(char[][] maze){
