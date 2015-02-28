@@ -171,4 +171,5 @@ public class Maze_solver {
         return coord;
     }
 }
+
 {% endhighlight %}
