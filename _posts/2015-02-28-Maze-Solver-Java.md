@@ -10,6 +10,7 @@ and eventually we will find the exit.
 
 Here is an example of the maze:
 {% highlight java linenos %}
+
 +--+--+--+--+--+--+--+--+--+--+
 |             S|     |     |  |
 +  +--+--+--+  +--+  +  +  +  +
@@ -31,12 +32,12 @@ Here is an example of the maze:
 +  +  +  +--+--+  +  +  +--+  +
 |     |              |        |
 +--+--+--+--+--+--+--+--+--+--+
+
 {% endhighlight %}
 
 The goal is to start from S and find F. Here is a possible solution:
 
 {% highlight java linenos %}
-package salo.baylor.edu;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
