@@ -58,23 +58,26 @@ class coord{
 //Directions: 1 - right, 2 - up, 3 - left, 4 - down
 
 public class Maze_solver {
+	static String maze_filename = "maze.txt";
 	static String route = "";
 	static int last_move_direction = 2; //guess first direction
 	static int[] directions = new int[]{4,1,2,3,4,1,2,3,4};	
 	static boolean foundWayOut = false;
 	@SuppressWarnings("serial")
-	static HashMap<Integer, Character> direction_letters = new HashMap<Integer, Character>() {{
-		put(1, 'r');
-		put(2, 'u');
-		put(3, 'l');
-		put(4, 'd');
-	}};
+	static HashMap<Integer, Character> direction_letters = new HashMap<Integer, Character>();
 	                                  
 	public static void main(String[] args) throws FileNotFoundException {
-		String maze_filename = "maze.txt";
+		initDirectionLetters()
 		char[][] maze = readMaze(maze_filename);
 		printMaze(maze);
 		getOut(maze);
+	}
+	
+	private void initDirectionLetters(){
+		direction_letters.put(1, 'r');
+		direction_letters.put(2, 'u');
+		direction_letters.put(3, 'l');
+		direction_letters.put(4, 'd');
 	}
 	
 	private static char[][] readMaze(String filename) throws FileNotFoundException{
