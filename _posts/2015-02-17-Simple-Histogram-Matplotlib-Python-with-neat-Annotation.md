@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Simple Histogram in Python Matplotlib with neat Annotation
+title: Simple Histogram in Python Matplotlib
 ---
 So matplotlib is really neat and powerful yet elegant and easy to use. 
 Here we have this simple hist with all you need:
@@ -35,3 +35,7 @@ ax.text(0.65, 0.95, textstr, transform=ax.transAxes, fontsize=14,
 pylab.show()
 {% endhighlight %}
 
+Which produces this:
+![Histogram]({{ site.baseurl }}/images/nums2.png)
+
+PS nums.txt it's just a file with numbers.
