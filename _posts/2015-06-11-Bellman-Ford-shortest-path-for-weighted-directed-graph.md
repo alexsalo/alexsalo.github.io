@@ -24,4 +24,4 @@ tart_node):
                     print sps
 
 bellman_ford(graph, 'a')
-d% endhighlight %
+{% endhighlight %}
