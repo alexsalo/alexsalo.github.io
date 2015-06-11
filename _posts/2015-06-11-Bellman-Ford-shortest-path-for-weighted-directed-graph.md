@@ -7,8 +7,16 @@ Bellman-Ford algorithm is easy and sufficiently efficient (~n^3) for finding Sho
 The idea is simple: for each vertex we mantain the SP (init with inf) and if the precedent vertex + edge weight gives us better sum - then we update current SP value for that vertex.
 
 Caveat: this algorithm fails if graph contains negative cycles since in that case one can obtain arbitrary small (negative) shortest path just by traversing this negative cycle over and over again.  
+
 {% highlight python linenos %}
-tart_node):
+graph = {
+    'a' : {'b' : 10, 'c' : 6},
+    'b' : {'d' : 5},
+    'c' : {'b' : 2},
+    'd' : {}
+}
+
+def bellman_ford(graph, start_node):
     N = len(graph)
     sps = dict.fromkeys(graph.keys(), 'inf')
     sps[start_node] = 0
@@ -24,4 +32,5 @@ tart_node):
                     print sps
 
 bellman_ford(graph, 'a')
+
 {% endhighlight %}
