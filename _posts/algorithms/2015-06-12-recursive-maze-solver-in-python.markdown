@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Recursive Maze Solver in Python
 date: 2015-06-12T14:39:54-05:00
 ---
