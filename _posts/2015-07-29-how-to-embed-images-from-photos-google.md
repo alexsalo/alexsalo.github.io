@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to Embed Images from photos.goole.com to Your Own Web Resource?
+title: How to Embed Images from photos.google to Your Own Web Resource?
 ---
 You love the convinience of google photos but wondering how to use this free unlimited hosting to display images on you own web resources or maybe on livejournal? 
 
