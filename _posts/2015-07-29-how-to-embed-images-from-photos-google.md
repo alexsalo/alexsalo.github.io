@@ -15,4 +15,4 @@ Profit!
 {% endhighlight %}
 
 Here is the screenshoot with what you need to find:
-![Copy src]({{site.url}}/images/google-photos-source.png)
+![Copy src](/images/google-photos-source.png)
