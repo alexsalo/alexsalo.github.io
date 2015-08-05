@@ -11,4 +11,4 @@ As a solution I made this android app that allows to turn your wifi OFF for X mi
 
 [Enjoy!](https://play.google.com/store/search?q=alexsalo&c=apps&hl=en)
 
-![Wifi X Min OFF](/images/wifi-off.png =250x)
+<img src="/images/wifi-off.png" alt="Wifi X Min OFF App" style="width: 250px;"/>
