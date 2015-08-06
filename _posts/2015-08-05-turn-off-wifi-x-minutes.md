@@ -9,6 +9,6 @@ Whenever I walk through campus my cellphone picks up the university's wifi conne
 
 As a solution I made this android app that allows to turn your wifi OFF for X minutes (you can adjust and save X); then it automatically turns it back ON.
 
-[Enjoy!](https://play.google.com/store/search?q=alexsalo&c=apps&hl=en)
+[Enjoy!](https://play.google.com/store/apps/details?id=com.alexsalovrn.wifixminturnoff&hl=en)
 
 <img src="/images/wifi-off.png" alt="Wifi X Min OFF App" style="width: 250px;"/>
