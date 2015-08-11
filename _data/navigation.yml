@@ -1,7 +1,7 @@
 # Menu navigation links
 
 - title: CV 
-  url: {{ site.url }}/alexsalo_cv.pdf
+  url: /alexsalo_cv.pdf
 
 - title: LiveJournal (ru) 
   url: http://alexsalo.livejournal.com 
