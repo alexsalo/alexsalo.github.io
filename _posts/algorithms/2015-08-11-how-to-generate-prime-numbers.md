@@ -6,7 +6,9 @@ Primary numbers are cool. You can factorize (decompose) any number into product 
 
 For generating a set of primes up to N we will use Eratosthenes Sieve method which was written down by this Greek guy. Idea is, as usual, very simple and elegant:
 * Make a list of numbers 2..N.
+
 * Starting with first element in the list, cross all its multiples in the list. 
+
 * Repeat until no multiples less than N left.
 
 In other words, we just start with the smallest prime (2) and remove all its multiples less than N; then take next prime (3) and do the same; then next prime would be (5) since (4) is already crossed. 
@@ -30,8 +32,11 @@ def eratosthenes_sieve(n):
 
 That was easy. Okay, let's try to optimize. Let us observe what happens when we remove multiples:
 * 2 -> remove: 4, 6, 8, 10, 12, 14, 16... 
+
 * 3 -> remove: **6**, 9, 12, 15 ...
+
 * 4 -> remove: **8**, **12**, **16** ...
+
 * 5 -> remove: **10, 15, 20**, 25 ...
 
 Interestingly, each time we try to find multiples for next prime, we see, that first multiples were already removed on the previous steps. By going further we can prove, that all the multiples less than current prime squared were already removed. That means we can trim this part of checks:
