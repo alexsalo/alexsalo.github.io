@@ -2,7 +2,7 @@
 layout: post
 title: How to Generate Prime Numbers? (Python)
 ---
-Primary numbers are cool. You can factorize (decompose) any number into product of primes, amazingly, each number has a single unique decomposition. Primes are like simple building blocks for all the other numbers, which are called composites. Generating and checking if number is a prime is the basis for many crypto systems like RSA. So, it make sense to know what's up.
+Primary numbers are cool. You can factorize (decompose) any number into product of primes, amazingly, each number has a single unique decomposition. Primes are like simple building blocks for all the other numbers, which are called composites.  Generating and checking if number is a prime is the basis for many crypto systems like RSA. So, it make sense to know what's up.
 
 For generating a set of primes up to N we will use Eratosthenes Sieve method which was written down by this Greek guy. Idea is, as usual, very simple and elegant:
 
@@ -96,5 +96,7 @@ eratosthenes_sieve bool odd time: 0.000149965286255
 {% endhighlight %}
 
 Understandably, bool version with both improvements (init with odds and start with p^2) works the fastest. 
+
+PS Funny fact: gcd(x,y) * lcm(x,y) = x * y, where gcd - Greatest Common Divisor, lcm - Least Common Multiple.
 
 
