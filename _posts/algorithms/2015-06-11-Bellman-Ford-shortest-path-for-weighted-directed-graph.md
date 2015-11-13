@@ -2,7 +2,7 @@
 layout: post
 title: Bellman-Ford Algorithm for Weighted Directed Graph 
 ---
-Bellman-Ford algorithm is easy and sufficiently efficient (~n^3) for finding Shortest Paths (SP). Notably, it finds the shortests paths to __ALL__ the other nodes in the graph.
+Bellman-Ford algorithm is easy and sufficiently efficient (E*V for straight forward implementation) for finding Shortest Paths (SP). Notably, it finds the shortests paths to __ALL__ the other nodes in the graph.
 
 The idea is simple: for each vertex we mantain the SP (init with inf) and if the precedent vertex + edge weight gives us better sum - then we update current SP value for that vertex.
 
