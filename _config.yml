@@ -40,6 +40,7 @@ highlighter: pygments
 markdown:    kramdown
 gems:
   - jekyll-sitemap
+  - jekyll-gallery-generator
 sass:
   sass_dir: _sass
   style: compressed
@@ -66,3 +67,24 @@ kramdown:
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
+
+
+gallery:
+  # path to the gallery
+  dir: photos
+  # title for gallery index
+  title: "Photos"
+  # title prefix for gallery page. title=title_prefix+gallery_name
+  title_prefix: "Photos: "
+  # field to control sorting of galleries for the index page
+  # (possible values are: title, date_time, best_image)
+  sort_field: "date_time"
+  # sizes for thumbnails
+  thumbnail_size:
+    x: 400
+    y: 400
+  # custom configuration for individual gallery
+  # best_image is image for the index page (defaults to last image)
+  #galleries:
+  #  chile_trip:
+  #    best_image: IMG_10
