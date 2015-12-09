@@ -27,3 +27,5 @@ Additionally, I actually used Chase Freedom credit card. I have had to flight fo
 To compare cards: Chase's freedom gives much better CL, but their online banking is garbage. They use points instead of actual currency which hinders analysis and that I don't like.  
 
 PS this post inspired by [Brandon's blog](http://frominsidethebox.com/view?key=5669283816275968) which is a nice story to read. Reading, writing and thinking about things allows be to better understand nature, and that, in turn, makes me a happier primate. 
+
+PSS ugly $100 for at&t is due to the new user on my account which covers two month of the usage. Normally I pay only $30, which still a whole lot for the little of simple service I need. 
