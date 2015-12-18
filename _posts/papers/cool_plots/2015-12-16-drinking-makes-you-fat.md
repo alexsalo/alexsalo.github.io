@@ -7,10 +7,7 @@ In particular, while making the weight change plots, I figured that **drinking m
 
 Well, there is no surprise - I've noticed that drinkers often fat (if they are not poor) a long time ago among humans. But let's see that effect precisly on Rhesus Macaques:
 
-[![Animal Weight Change][2]][1]
-
-  [1]: {{ site.url }}/images/matrr/10215_weight_change.png
-  [2]: {{ site.url }}/images/matrr/10215_weight_change.png (animal weight change)
+[![Animal Weight Change]({{ site.url }}/images/matrr/10215_weight_change.png)]({{ site.url }}/images/matrr/10215_weight_change.png)
 
 Notice how weight increases steadily over the alcohol exposure periods (Induction and Open Access). Then something interesting happens: after withdrawal (they take them away from alcohol), animal loses 20% of its body weight during one month! Then, alcohol restored, it gains weight again; cycle repeats with the new withdrawals. 
 
