@@ -2,58 +2,56 @@
 layout: post
 title: Time Series Investigations
 ---
-During the Spring 2015 I've taken the Machine Learning class which was a blast: by applying rather simple math apparatus in a fancy fashion we can *learn* on the data we have. 
+I've taken Time Series analysys class to figure out if analyzing financial data and predicting stock markets (my first association with time series) were something I would be interested in doing. Additionally, there are many practical scientific and business applications - starting with electrocardiology analysis and ending with airline tickets sales. 
 
-### What is Machine Learning anyways? 
-There is a slim edge between stats, data mining and ML - they all interconnected, sure, but the key difference is the following:
+What I've learned, shortly: 
 
-- Stats: we try to describe the data and estimate significance based on the samples we have; most of the times we want sample to be drawn out of "normal" population (meaning, in stats, all the possible data points).
+- Don't play on the stock markets - the best guess is (almost) always the current value (in other words, the chance of being any good in prediction is basically zero).
+- Use TS to gain insights about your business data.
+- Scientific use is very complicated most of the times nonetheless interesting.
 
-- Data Mining: we try to *mine* some associations and connections between the items in the dataset; no assumptions on the data.
+### What is Time Series Analysys anyways? 
+In regular stats we have a population (set of all data points), from which we have a random (i.e. representative - hopefully) sample (of size N) of available observations. We calculate **sample** statistics and *infer it to be true* about the **general** population as well. The bigger the sample size N the more we are statistically sure.
 
-- Machine Learning: given the dataset (sample mapping) of X->Y, we want to *learn to mimic" the algorithm that converts the X into Y, so we can use it later on new X'. In general, there are no assumptions on the distribution (although some methods do assume things), and what's cool, that we don't really care what the algorithm looks like, as long as we can successfully mimic it (what a bummer for all the stats people who are like "wat? I want to know the true process!" right now..)
+Now, Time Series Analysys want to perform similar trick (analysing sample and infering about general) but for the ***process*** rather than for the population. Usually, then, we have only **one** observation/realization (Apple stock price history) of the process , but this process could have generated a different realization - in fact infinitely many of them! That is the key difference of the TS: we trying to describe the process that generated different realizations using avavailble observations (ususully one) and then predict what would happen to our realization in the future. I hope by now you get the idea of how sketchy and speculative all that sound - in case of the stock markets, especially, it's pretty much a gamble. 
 
-Anyways, during the class we had several home assignments to investigate different aspects of various methods which I present below, along with the short summary of what is learned.   
+To describe the observation (time serie) people came up with a model ARIMA, which stands for auto regressive integrated moving average. Sounds scary, but in reality it's extremely simple:
+
+- AR part is just a linear combination (summation with coefficients) of previous TS values equal white noise.
+- MA part is again just a linear combination, this time of random noise values equals to the current TS value.
+- Integrated simply means that de-trend the time series by linearly substracting previous value from the current.
+
+Given the realization, we try to fit the coefficients for those linear combinations and then predict the future values.
+
+That is, shortly, what is Time Series about. Again, importantly, the length of the TS doesn't give us the statistical power, as in regular statistics - we only gain power if we have **more realizations**, when, for instance, we track the heart beat process for the 24 hours straights, which yields a lot of observations of that cyclic process.
 
 ### Investigations
 
-#### Linear and Logistic regression: Gradient Descent and Newton's method
+#### Estimating ARMA Coefficients and Predicting Future
 <a href="/papers/investigations/time-series/estimating-coefficients-and-predicting-ARMA-process.pdf">
 <img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/estimating-coefficients-and-predicting-ARMA-process.png" width="260"  align="right">
 </a>
-The most basic ML's tool is the Linear Regression: we try to fit the line into the data points (i.e. price of the apartment based on size and distance to public transport; then we can predict how much would the new apt cost with given size and distance). 
-
-Then we can do a "sliding window" for achieving locally-weighted linear regression - we can make the line flexible. Playing with the weights we trade off bias and variance. 
-
-Instead of "float" regression, we can do "logistic" (dichotomy) regression, i.e. answering "yes" or "no" for a given data. 
-
-To solve this we use the one of the following:
-
-Linear Regression & Logistic Regression:
-
-- Gradient Descent - fast and efficient, has closed form solution; could get stuck in local optima; could be randomized.
-- Newthon's method - even faster - finishes in just a few iteration; could have issues on some data since needs Hessian matrix (second partial derivative). 
+In this take home final exam for TS class we created a definitive ARMA process (by specifying the true coefficients) to generate 500 realizations. Then using them (all or partially) tried to fit the coefficients using the standard tool set, while judging which metrics work better for our case. Finally, there is example of predicting TS - even for the simple case it works remarkably bad, in my opinion.
 
 
-
-#### K-Means Clustering
+#### (Non) Consistent Estimators and the Effect of Differencing
 <a href="/papers/investigations/time-series/realizations-and-estimators-consistency.pdf">
 <img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/realizations-and-estimators-consistency.png" width="260"  align="right">
 </a>
-K-means is a work horse in data analysis - it is so simple, fast and efficient, that most of the times we end up using it either directly, or within more complex procedure. 
+Consistent estimator is an estimator which only gets closer to the true parameter given more realizations. In this paper we learn that while sample autocorrelation is consitent estimator, periodogram is not.
 
-The paper investigates how to choose optimal **k** (try several, check the error, take the **k** with min error) and the importance of the initialization - with bad luck K-means can get stuck in local optima; but we are computer scientists, we don't like to be dependent on luck - run K-means many many times and take the best results - the chances of getting stuck in local optima decrease polynomially. 
-
-K-means is a particular case of Expectation-Minimization algorithms family. We could use median or whatever else to achieve the result - paper shows the generalized approach. 
+(First order) differencing is just: for each x_(i) in TS do: x_(i) = x_(i) - x_(i-1). By doing so we can remove linear trend. Paper discusses how to do that in R and how it affects sample correlogram and spectrum.
 
 
-#### GDA, Naive Bayes and Ridge Regression
+#### Harmonic Process and How to Convert ARMA into MA
 <a href="/papers/investigations/time-series/harmonic-and-AR-MA-identifyability.pdf">
 <img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/harmonic-and-AR-MA-identifyability.png" width="260"  align="right">
 </a>
-In Gradient Descent we have some problems with the collinearity. Ridge regression technique allows to penalize high theta (hypothesis of algorithm that we are trying to learn) coefficients, that appeared due to the collinearity in the data, while with moderate values of parameter λ it would not significantly decrease predictive power (in other words would not increase cost function). By doing that we avoid blown-up theta values that potentially lead to calculus errors.
+Harmonic process is simply sum of sinusoids, we show it to be second-order stationary. Also it doesn't have a good spectrum function because it's not absolutely continuous; the cumulative spectrum is alright though. 
 
-Paper also compares the Naive Bayes vs SVM performance on spam filter example, how to do La-Place smoothing to avoid missing data errors, and also shows how the two-class Gaussian Discriminant Analysis, with common covariance Σ, is exactly a logistic sigmoid function.
+Then paper shows how to convert ARMA into MA(inf) representation by long division - which only works if the AR roots are outside of unit circle. 
+
+Paper also shows the effect of taking the 12th differencing on spectrum and shows how to check wether or not the AR coefficients are valid (possible). 
 
 
 #### Mistake Bounds and Uniform Convergence
