@@ -4,9 +4,11 @@ title: Visualizations in Python via Pandas and Matplotlib
 ---
 I've grown to be quite a fan of Python tools for plotting - namely, Matplolib library, and other packages that uses it, i.e. Pandas. Community is also great, all the questions has long been answered on StackOverflow. 
 
-In this post I just want to share and preserve those useful methods and approaches that I came up with while working on my bio data analysis. Below is the result plot, which contains ALOT of raw and aggregated information, and how it is done with extensive comments:
+In this post I just want to share and preserve those useful methods and approaches that I came up with while working on my bio data analysis. Below is the result plot, which contains a lot of raw and aggregated information:
 
 [![Regression (BD)]({{ site.url }}/images/matrr/22hr_bec_more2stdev_12combinedpanels.png)]({{ site.url }}/images/matrr/22hr_bec_more2stdev_12combinedpanels.png)
+
+And here goes the code that makes it done, along with explanatory comments:
 
 {% highlight python linenos %}
 def plot_panels(df_all, df_group_1, df_group_2,
