@@ -25,7 +25,7 @@ Given the realization, we try to fit the coefficients for those linear combinati
 
 That is, shortly, what is Time Series about. Again, importantly, the length of the TS doesn't give us the statistical power, as in regular statistics - we only gain power if we have **more realizations**, when, for instance, we track the heart beat process for the 24 hours straights, which yields a lot of observations of that cyclic process.
 
-### Investigations
+### Investigations (pdf papers)
 
 #### Estimating ARMA Coefficients and Predicting Future
 <a href="/papers/investigations/time-series/estimating-coefficients-and-predicting-ARMA-process.pdf">

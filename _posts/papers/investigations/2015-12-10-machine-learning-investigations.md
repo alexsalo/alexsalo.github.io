@@ -15,7 +15,7 @@ There is a slim edge between stats, data mining and ML - they all interconnected
 
 Anyways, during the class we had several home assignments to investigate different aspects of various methods which I present below, along with the short summary of what is learned.   
 
-### Investigations
+### Investigations (pdf papers)
 
 #### Linear and Logistic regression: Gradient Descent and Newton's method
 <a href="/papers/investigations/machine-learning/mle_wlr_gradient-descent_newthon.pdf">
