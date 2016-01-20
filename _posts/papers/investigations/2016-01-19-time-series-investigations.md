@@ -51,11 +51,11 @@ Harmonic process is simply sum of sinusoids, we show it to be second-order stati
 
 Then paper shows how to convert ARMA into MA(inf) representation by long division - which only works if the AR roots are outside of unit circle. 
 
-Paper also shows the effect of taking the 12th differencing on spectrum and shows how to check wether or not the AR coefficients are valid (possible). 
+Paper also shows the effect of taking the 12th differencing on spectrum and shows how to check whether or not the AR coefficients are valid (possible). 
 
 
-#### Mistake Bounds and Uniform Convergence
+#### Time Series Models Summary
 <a href="/papers/investigations/time-series/time-series-models-summary.pdf">
 <img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/time-series-models-summary.png" width="260"  align="right">
 </a>
-The cool thing is - we can put a bound on how big our mistakes could be. This paper goes rather deep in how by making more hypothesis we reduce the chance of the mistakes. Also discuses the usage of L-2 soft margins for SVM.
+A dry summary on TS models: White Noise, Random Walk, Harmonic, AR, MA, ARMA and their properties: ACF, partial ACF and spectrum.
