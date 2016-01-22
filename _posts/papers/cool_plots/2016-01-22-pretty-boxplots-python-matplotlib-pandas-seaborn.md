@@ -28,14 +28,13 @@ OK, well - that's quite ugly: though works, it's very hard to read the plot - vi
 {% highlight python%}
 df.groupby('Sex').boxplot(column=attribute, by='Period')
 {% endhighlight %}
-[![]({{ site.url }}/images/matrr/bad_boxplot_groupby.png)]({{ site.url }}/images/matrr/bad_boxplot_groupby.png)
+[![]({{ site.url }}/images/matrr/boxplot_combined_drink_to_bout_ratio_LD_BD.png)]({{ site.url }}/images/matrr/boxplot_combined_drink_to_bout_ratio_LD_BD.png)
 
 That's something - definitely looks better. The problem arises for the other grouping, however:
 {% highlight python%}
 df.groupby('Period').boxplot(column=attribute, by='Sex')
 {% endhighlight %}
-[![]({{ site.url }}/images/matrr/boxplot_combined_drink_to_bout_ratio_LD_BD.png)]({{ site.url }}/images/matrr/boxplot_combined_drink_to_bout_ratio_LD_BD.png)
-
+[![]({{ site.url }}/images/matrr/bad_boxplot_groupby.png)]({{ site.url }}/images/matrr/bad_boxplot_groupby.png)
 #### Factorplot in Seaborn
 Luckily, we can both make the plots look better and cope with bad subplots arrangement by using the Seaborn library. It doesn't allow for multiple groupby in it's boxplot implementation, however it offers a special ***factorplot*** which does exactly what we want:
 
