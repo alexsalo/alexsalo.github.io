@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, python, plotting]
 title: Simple Histogram in Python Matplotlib
 ---
 So matplotlib is really neat and powerful yet elegant and easy to use. 

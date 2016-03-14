@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [design, mobile, web]
 title: Mobile Apps That Don't Get Job Done, or Web Anti-Patterns
 ---
 So much more often than not users are being solicited with the "Install our new super awesome mobile app", which does not fulfil the goals for which they tried to access the web resource in the first place. Annoying pop up often prevents from getting further, but even if you manage to close the pop up - you'll most likely get a mobile version of the web site. 

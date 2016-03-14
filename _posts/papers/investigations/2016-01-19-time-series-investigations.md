@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [papers, R]
 title: Time Series Investigations
 ---
 I've taken Time Series analysis class to figure out if analyzing financial data and predicting stock markets (my first association with time series) were something I would be interested in doing. Additionally, there are many practical scientific and business applications - starting with electrocardiology analysis and ending with airline tickets sales. 

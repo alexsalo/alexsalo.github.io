@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [python, plotting]
 title: ANCOVA, Compare Regression Slopes in Python
 ---
 How to compare two regressions in Python? I didn't find a good simple answer - hence this post. Seems like we need to compare regressions by slope, but how to test the significance? ANCOVA is the answer!

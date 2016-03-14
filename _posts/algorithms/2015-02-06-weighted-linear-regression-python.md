@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, python]
 title: Weighted Linear Regression in Python
 ---
 

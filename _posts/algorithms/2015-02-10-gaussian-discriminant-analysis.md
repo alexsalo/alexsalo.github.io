@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, matlab]
 title: Gaussian Discriminant Analysis
 ---
 GDA is an example of generative learining. It works very simple:

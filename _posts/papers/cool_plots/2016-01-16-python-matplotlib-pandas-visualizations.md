@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [python, plotting]
 title: Visualizations in Python via Pandas and Matplotlib
 ---
 I've grown to be quite a fan of Python tools for plotting - namely, Matplolib library, and other packages that uses it, i.e. Pandas. Community is also great, all the questions has long been answered on StackOverflow. 

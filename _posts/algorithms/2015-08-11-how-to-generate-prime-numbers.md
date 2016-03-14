@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, python]
 title: How to Generate Prime Numbers? (Python)
 ---
 Primary numbers are cool. You can factorize (decompose) any number into product of primes, amazingly, each number has a single unique decomposition. Primes are like simple building blocks for all the other numbers, which are called composites.  Generating and checking if number is a prime is the basis for many crypto systems like RSA. So, it make sense to know what's up.

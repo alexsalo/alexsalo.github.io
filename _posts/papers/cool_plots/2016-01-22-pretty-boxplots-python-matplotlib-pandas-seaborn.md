@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [python, plotting]
 title: Pretty Boxplots in Matplotlib, Pandas and Seaborn
 ---
 Python's Matplotlib offers great flexibility of plotting. Pandas adds convenience of working with data and plotting it. There is also a [Seaborn](https://stanford.edu/~mwaskom/software/seaborn/) that makes the output plots look pretty. Let's see an example.

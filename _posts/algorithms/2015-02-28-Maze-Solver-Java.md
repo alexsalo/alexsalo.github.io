@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, java]
 title: Maze Solver in Java
 ---
 Really nice way to check a potential candidate problem-solving skills is to test him as a mouse. 

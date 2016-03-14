@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [money]
 title: Cash Rewards and Sign Up Bonus
 ---
 Being a [Mustashian](http://www.mrmoneymustache.com/), as I've learned only recently (many Russians are anyway), I like to see precisely how my money flow in and out. It's been a year since I started to play the Credit Game, and now when my score was high enough to get some classic credit cards I'm ready to do some evaluation. 

@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [swift]
 title: Get location of selected photo Swift
 ---
 

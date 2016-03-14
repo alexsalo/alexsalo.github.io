@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, python]
 title: Bellman-Ford Algorithm for Weighted Directed Graph 
 ---
 Bellman-Ford algorithm is easy and sufficiently efficient (E*V for straight forward implementation) for finding Shortest Paths (SP). Notably, it finds the shortests paths to __ALL__ the other nodes in the graph.

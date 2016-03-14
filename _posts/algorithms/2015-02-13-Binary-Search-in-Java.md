@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, java]
 title: Binary Search in Java
 ---
 

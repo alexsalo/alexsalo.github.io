@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, python]
 title: How to Check if the Number is Prime?
 ---
 To check if the number N is a prime we can either generate with the Eratosthenes Sieve the bool array for all the numbers <= N and them sipmly check if true. However, that seems like overkill to me (especially for big N), so let's try something different while using all the knowledge about primes we already have:

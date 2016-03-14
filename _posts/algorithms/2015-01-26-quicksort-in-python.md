@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, python]
 title: Quicksort in Python
 ---
 

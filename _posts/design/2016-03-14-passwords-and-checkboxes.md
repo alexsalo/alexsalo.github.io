@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [design, security]
 title: Weak Pass And Poor Checkbox Use
 ---
 Making the first impression is very important for your service, and login/register form is typically the first thing user will see, which renders it important to invest and design it right.

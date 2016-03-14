@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [mobile]
 title: Turn Off Your WiFi for X minutes
 ---
 As usual, this app was born to solve the problem, that I encountered way too often to ignore the opportunity for the optimization. 

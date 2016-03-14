@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [algorithms, java]
 title: How to Implement Arithmetic Operators in Java?
 ---
 Famously, addition and negation is sufficient to perform all the other operations like subtraction, multiplication and division. If we are allowed to use loops and arbitrary integers on the way, it is relatively straightforward ho to implement negation using addition:

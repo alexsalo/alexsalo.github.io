@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [papers, machine learning, python]
 title: Investigations on Machine Learning
 ---
 During the Spring 2015 I've taken the Machine Learning class which was a blast: by applying rather simple math apparatus in a fancy fashion we can *learn* on the data we have. 

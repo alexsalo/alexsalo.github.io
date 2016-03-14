@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [security]
 title: Keeping Your Email Address Safe
 ---
 How do spammers learn our email addresses? Well, it's possible to buy them (in huge bunches, of course) from various sellers. Seller could be not-so-honest-web-site, that just sells its customer base, or someone, who crawled a part of the web (in which you are present) and **parsed** your email address.

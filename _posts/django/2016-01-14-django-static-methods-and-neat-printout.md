@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [django, python]
 title: Static Methods in Django Models and Neat Model's Content Printout
 ---
 Recently I figured a neat way to print the content of the model for your own testing of for data shipment. Most of the times you want to use Pandas DataFrame, but you need to pass along the fields that you want to select from the DB. More often than not though the fields that you want to display stay same for the model. That's why I started to add one extra field to the model - columns for display. For example, in MonkeyEphys:

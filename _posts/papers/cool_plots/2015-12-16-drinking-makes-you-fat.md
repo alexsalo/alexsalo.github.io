@@ -1,5 +1,6 @@
 ---
 layout: post
+tags: [python, plotting]
 title: Drinking Makes You Fat!
 ---
 I've been working on [matrr.com](http://matrr.com/) project for the last year. Different labs across the country offer monkeys an alcoholic beverages (4% EtOH mixed with sugar in water) and investigate the consequesnces. We collect the data for the reuse by others, while also aggregating and doing various analysis. 
