@@ -1,0 +1,56 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1048" measuredH="543" mockupW="720" mockupH="458">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="328" y="85" w="720" h="458" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="389" y="148" w="499" h="332" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Switch" x="902" y="439" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <onOffState>off</onOffState>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="908" y="149" w="-1" h="-1" measuredW="115" measuredH="54" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>40</size>
+        <text>01%3A42</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::RoundButton" x="902" y="242" w="127" h="127" measuredW="32" measuredH="32" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::RoundButton" x="912" y="252" w="107" h="107" measuredW="32" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="931" y="271" w="94" h="-1" measuredW="66" measuredH="70" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>28</size>
+        <text>Start%5CnStop</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Switch" x="902" y="475" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <onOffState>off</onOffState>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="960" y="435" w="-1" h="-1" measuredW="69" measuredH="37" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Defrost%5Cn%28low%20power%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="960" y="471" w="-1" h="-1" measuredW="79" measuredH="37" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Other%20yes/no%5Cnoption</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::PointyButton" x="908" y="509" w="131" h="-1" measuredW="74" measuredH="27" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <direction>center</direction>
+        <newLayout>true</newLayout>
+        <text>Set%20Time</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
