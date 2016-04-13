@@ -30,14 +30,14 @@ That is, shortly, what is Time Series about. Again, importantly, the length of t
 
 #### Estimating ARMA Coefficients and Predicting Future
 <a href="/papers/investigations/time-series/estimating-coefficients-and-predicting-ARMA-process.pdf">
-<img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/estimating-coefficients-and-predicting-ARMA-process.png" width="260"  align="right">
+<img border="0" src="/papers/investigations/time-series/preview/estimating-coefficients-and-predicting-ARMA-process.png" width="260"  align="right">
 </a>
 In this take home final exam for TS class we created a definitive ARMA process (by specifying the true coefficients) to generate 500 realizations. Then using them (all or partially) tried to fit the coefficients using the standard tool set, while judging which metrics work better for our case. Finally, there is example of predicting TS - even for the simple case it works remarkably bad, in my opinion.
 
 
 #### (Non) Consistent Estimators and the Effect of Differencing
 <a href="/papers/investigations/time-series/realizations-and-estimators-consistency.pdf">
-<img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/realizations-and-estimators-consistency.png" width="260"  align="right">
+<img border="0" src="/papers/investigations/time-series/preview/realizations-and-estimators-consistency.png" width="260"  align="right">
 </a>
 Consistent estimator is an estimator which only gets closer to the true parameter given more realizations. In this paper we learn that while sample autocorrelation is consistent estimator, periodogram is not.
 
@@ -46,7 +46,7 @@ Consistent estimator is an estimator which only gets closer to the true paramete
 
 #### Harmonic Process and How to Convert ARMA into MA
 <a href="/papers/investigations/time-series/harmonic-and-AR-MA-identifyability.pdf">
-<img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/harmonic-and-AR-MA-identifyability.png" width="260"  align="right">
+<img border="0" src="/papers/investigations/time-series/preview/harmonic-and-AR-MA-identifyability.png" width="260"  align="right">
 </a>
 Harmonic process is simply sum of sinusoids, we show it to be second-order stationary. Also it doesn't have a good spectrum function because it's not absolutely continuous; the cumulative spectrum is alright though. 
 
@@ -57,6 +57,6 @@ Paper also shows the effect of taking the 12th differencing on spectrum and show
 
 #### Time Series Models Summary
 <a href="/papers/investigations/time-series/time-series-models-summary.pdf">
-<img border="0" alt="W3Schools" src="/papers/investigations/time-series/preview/time-series-models-summary.png" width="260"  align="right">
+<img border="0" src="/papers/investigations/time-series/preview/time-series-models-summary.png" width="260"  align="right">
 </a>
 A dry summary on TS models: White Noise, Random Walk, Harmonic, AR, MA, ARMA and their properties: ACF, partial ACF and spectrum.
