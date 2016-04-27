@@ -18,12 +18,12 @@ Document structure:
     - [Hive](#nosql-hive)
     - [SparkSQL](#nosql-sparksql)
 
-<!--cut-->
-
 ## <a id="lwr"></a> 1. Locally Weighted Linear Regression
 Often, when working with real data, we realize that our data doesn't really lie on the straight line - in other words linear regression fails to capture a lot of variation. When that happens we can use a higher degree polynomial of our features to fit data perfectly. The problem with such parametric approach is two-fold: first, we need to manually choose the "right" degree of polynomials which leads to either underfitting or overfitting; second, we don't take advantage of the new data that will flow in - once the model is set it is not going to change.
 
 To address these issues we want to implement Locally Weighted [Linear] Regression (LWR), which, assuming sufficient size of the training set, makes the choice of features much less critical. Additionally, LWR is a lazy learning approach and allows us learn on the newly obtained data. Given the goal of Big Data analytics, we definitely want to make use of all the data, yet we are concerned with the computational efficiency. Thus we would like to use NoSQL tools to implement LWR. Now let us briefly discuss the math behind the LWR algorithm, evaluate its time complexity  and find possibilities for optimization via parallelization.
+
+<!--cut-->
 
 ### <a id="lwr-discussion"></a> Algorithm Discussion
 To understand Locally Weighted linear Regression (LWR) let us consider a simple linear regression (LR) first. As an input we have N-dimensional dataset X with M examples (each example has N features) and 1-dimensional vector Y with targets. The goal of LR is to fit the line that would map X -> Y at the minimized OLS sum. Such line would allows us to predict y-value for any x-input.
@@ -418,7 +418,7 @@ $ hdfs dfs -cat /user/root/mapreduce_output/* | /nosql/hadoop/lwr_plot_x_query.p
 ```
 
 This should produce a picture like that:
-<img src="lwr_demo.png" width="800">
+[![Demo]({{site.url }}/images/lwr_demo.png)]({{ site.url }}/images/lwr_demo.png)
 
 
 To finish up - shut down the daemons:

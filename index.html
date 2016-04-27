@@ -36,7 +36,7 @@ image:
   </header>
   <div class="entry-content">
     {{ post.content | split:'<!--cut-->' | first}}
-      (<a href="{{ post.url }}">Read More...</a>)
+      <center>(<a href="{{ post.url }}">Read More...</a>)</center>
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 {% endfor %}
