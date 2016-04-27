@@ -1,13 +1,13 @@
 ---
 layout: post-index
 title: Alex Salo Dev Notes
-description: "Some nifty little algorithms"
-tags: [dev, python]
+description: "Algorithms and Tools"
+tags: [algorithms, bigdata, nosql, python, django, hadoop, mapreduce]
 comments: true
 image:
   feature: abstract-1.jpg
-  credit: dargadgetz
-  creditlink: http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/
+  credit: alexsalo
+  creditlink:
 ---
 
 {% for post in paginator.posts %}
@@ -35,7 +35,8 @@ image:
     {% endif %}
   </header>
   <div class="entry-content">
-    {{ post.content }}
+    {{ post.content | split:'<!--cut-->' | first}}
+      (<a href="{{ post.url }}">Read More...</a>)
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 {% endfor %}
