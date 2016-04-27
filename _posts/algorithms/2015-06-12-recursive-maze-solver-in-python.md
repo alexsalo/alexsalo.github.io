@@ -4,10 +4,10 @@ tags: [algorithms, python]
 title: Recursive Maze Solver in Python
 date: 2015-06-12T14:39:54-05:00
 ---
-When I was asked to make a program for solving a maze during the job interview for some reason I simply attempted to model a known human-friendly heuristics: follow the right wall. The [resulting code]({% post_url /algorithms/2015-02-28-Maze-Solver-Java %}) was very long and somewhat hard although worked alright. 
+When I was asked to make a program for solving a maze during the job interview for some reason I simply attempted to model a known human-friendly heuristics: follow the right wall. The [resulting code]({% post_url 2015-02-28-Maze-Solver-Java %}) was very long and somewhat hard although worked alright. 
 
 Now, during the algorithms class and review of DFS I decided to try the recursive approach for solving the maze.
-For starters let us create one: 
+For starters let us create one:
 
 {% highlight python linenos %}
 # 0 clear
@@ -99,4 +99,4 @@ if not FoundWayOut:
 
 First call should be made from the start position.
 
-Overall, recursive solution is way more elegant and easier to grasp as well as to implement. 
+Overall, recursive solution is way more elegant and easier to grasp as well as to implement.
