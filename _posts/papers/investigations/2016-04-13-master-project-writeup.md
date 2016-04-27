@@ -5,7 +5,7 @@ title: Data Interpretation and Learning on Heterogeneous Behavioral Data Sets
 ---
 Below is my first real paper in English: a master's project write-up at ECS, Baylor University. Acedemic writing, surprisingly, proved to be easier (for non-native) than publicistic style: we want to use short, precise and concise words (which are easier to know since they mostly universal due to the Latin roots) with simple sentence structure, and generally avoid very long complicated sentences like this one, which is so prone to ample mistakes. Anyways, here is an abstract for the PDF attached (click on the image): 
 
-<a href="/papers/master_project_writeup.pdf/">
+<a href="/papers/master_project_writeup.pdf">
 <img border="0" alt="Masters Project Writeup" src="/papers/preview/master-project-1.png" width="260"  align="right">
 </a>
 
