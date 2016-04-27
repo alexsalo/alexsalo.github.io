@@ -27,19 +27,19 @@ To address these issues we want to implement Locally Weighted [Linear] Regressio
 
 ### <a id="lwr-discussion"></a> Algorithm Discussion
 To understand Locally Weighted linear Regression (LWR) let us consider a simple linear regression (LR) first. As an input we have N-dimensional dataset X with M examples (each example has N features) and 1-dimensional vector Y with targets. The goal of LR is to fit the line that would map X -> Y at the minimized OLS sum. Such line would allows us to predict y-value for any x-input.
-```shell
+{% highlight bash %}
 m  | X (features)    | Y (targets)  
 --------------------------------
 1: |1 x0 x1 x2 ... xn| y
 2: |1 x0 x1 x2 ... xn| y
 .: |1 ...      ...   | y
 M: |1 x0 x1 x2 ... xn| y
-```
+{% endhighlight %}
 Note that we appended X to a columns of ones - resulting matrix is called a *design matrix* - it allows us to find the intercept of the line. To construct that line (or, more generally, a hyperplane in N-dimensional space) we find the best hypothesis **theta** (which is a vector [size N] of coefficients for each dimension of X) by solving the following normal equation:
-<p align="center">X'X&theta;=X'Y</p>
+<center>X'X&theta;=X'Y</center>
 
 The closed form solution then:
-<p align="center">&theta;=inv(X'X)X'Y</p>
+<center>&theta;=inv(X'X)X'Y</center>
 
 This solution gives the intercept and slopes (hypothesis &theta;) for the line in each X's dimension. The LWR goes a step further and locally adjusts the line according to the proximity to other data points - the closer the point the more weight it has.
 
@@ -48,7 +48,7 @@ That is a good time to introduce one simple yet not very intuitive feature of LW
 In the LWR, since our predictions are no longer linear, but adjusted by the neighboring points, *for each x-point we want to predict (we would call it query point), we need to calculate its own hypothesis &theta;*. For each such query point we consider all other points available, but their influence is weighted by the distance to our query point. That is a LWR in a nutshell. Let us now see how it translates into linear algebra.
 
 In fact, all we need to change for LWR is to add a weight matrix W (diagonal matrix of size m x m), and solve the analogous normal equation as:
-<p align="center">&theta;=inv(X'WX)X'WY</p>
+<center>&theta;=inv(X'WX)X'WY</center>
 
 Finally, note that we use a Gaussian Kernel as our distance function. We use bandwidth parameter *C=0.5* throughout this project. The choice of the bandwidth could be optimized and found automatically, but that does not change anything in our area of interest.
 
@@ -58,20 +58,21 @@ Just how fast LWR works? Should we even care to parallelize? The answer is yes -
 One obvious way to parallelize LWR is when we want to calculate the prediction for several query points. In that case we simply split the set of Q query points between the P cored and we are done ~Q/P times faster. Implementing this trivial solution is rather straightforward so we would not consider it. Instead we would be concerned in how can we *parallelize the computations for a single query point*.
 
 Recall that in order to find a hypothesis &theta; for a single query point over the set of training examples we need to solve the following normal equation:
-<p align="center">A&theta;=B</p>
+<center>A&theta;=B</center>
 Where:
 
-```shell
+{% highlight sh %}
 A = X'WX has dimensions: X'(n x m) * W(m x m) * X(m x n) => A (n x n)
 B = X'WY has dimensions: X'(n x m) * W(m x m) * Y(m x 1) => B (n x 1)
 theta = inv(A)*B has dimensions: A (n x n) * b (n x 1) => theta (n x 1)
-```
+{% endhighlight %}
+
 Note that we can perform exactly the same operations over an individual training examples:
-```shell
+{% highlight sh %}
 # given ith example x = X[i]
 a = x'wx has dimensions: x'(n x 1) * w(1 x 1) * x(1 x n) => a (n x n)
 b = x'wy has dimensions: x'(n x 1) * w(1 x 1) * y(1 x 1) => b (n x 1)
-```
+{% endhighlight %}
 And they produce the matricies a and b of exactly the same size as A and B. Thus we notice the additivity property in the LWR calculation, and that is a good sign of the parallelization eligibility.
 
 In fact, all we need to do is to split all the training examples into the P equal parts and feed them to P cores to deal with. Each core will compute partial sums of matricies A and B. Then we simply sum those intermediate matricies produced by each core into resulting A and B, and then compute the hypothesis as &theta;=inv(A)\*B
@@ -81,9 +82,9 @@ The time complexity of a single core LWR is given by O(mn<sup>2</sup>) to comput
 On our LWR (no parallelization of the matrix inverse), P cores gives us total of O(mn<sup>2</sup>/P + n<sup>3</sup>), plus some communication cost. Given our assumption m>>n we can drop the n term and estimate the time complexity as O(m/P), and expect that, in theory, LWR should perform linearly faster with the increase in the number of cores.
 
 
-## <a id="hadoop-overview"></a> 3. Hadoop Ecosystem Overview
-### Hadoop Ecosystem Overview
+## <a id="hadoop-overview"></a> 2. Hadoop Ecosystem Overview
 How do we set about to implement LWR in NoSQL world? We want something robust, open source and easy to work with. Luckily, there is just such a thing:
+
 > The Apache Hadoop software library is a framework that allows for the distributed processing of large data sets across clusters of computers using simple programming models.
 
 Hadoop consists of two main things: a *Distributed File System (HDFS)* and computational framework *MapReduce*. HDFS provides us with fault tolerant distributed file storage system that provides high-throughput access to application data. MapReduce allows easy parallel processing of large data sets. There are also a *Hadoop Common* utilities used by other tools within Hadoop Ecosystem, and YARN - framework for job scheduling and cluster resource management, which is not going to play a critical role in our implementations.
@@ -119,9 +120,9 @@ Finally, we can run SparkSQL on top of everything: over HDFS files or Hive table
 In other words, with SparkSQL we can combine all the benefits of either HDFS, MapRecude, HIVE and Spark under unified workspace and using desirable Python.
 
 
-## <a id="os-setup"></a> 2. Setting Up OS Env
+## <a id="os-setup"></a> 3. Setting Up OS Env
 You can skip this section if you are simply executing files on provided VM (come back if you see any suspicious exceptions). Here we highlight the basic OS environment setup that will ease our work with NoSQL tools. All the tools, in the latest stable version as of 25 April 2016, were downloaded from official Apache servers and unpacked into */nosql/<toolname>* folder. Along with that, */nosql/* folder contains an *input/* folder with our input data. Below is a short description of the project folder structure:
-```shell
+{% highlight sh %}
 $ sudo su    # password: bigdata
 $ cd /nosql
 $ tree --filelimit 8  # show folder structure
@@ -153,17 +154,17 @@ $ tree --filelimit 8  # show folder structure
     ├── csv-to-json.py
     ├── lwr_sparksql.py
     └── README.md
-```
+{% endhighlight %}
 **Important note**: if you change something, make sure all your *python executable files know the path to python interpreter* and *have correct privileges*:
-```shell
+{% highlight sh %}
 $ cat <python_script>.py
 # #!/usr/bin/env python
 # ...
 $ chmod +x python_script.py
-```
+{% endhighlight %}
 
 To be able to *run all the tools from anywhere* we need to update system *PATH* variable. To make update permanent, we put append into */root/.bash_rc* the */root/.bash_nosql_exports* file with the following content:
-```shell
+{% highlight sh %}
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 export HADOOP_HOME=/nosql/hadoop/hadoop-2.7.2
 export SPARK_HOME=/nosql/spark/spark-1.6.1-bin-without-hadoop
@@ -171,16 +172,16 @@ export HIVE_HOME=/nosql/hive/apache-hive-2.0.0-bin
 
 # Append PATH
 export PATH=$HIVE_HOME/bin:$HADOOP_HOME/bin:$SPARK_HOME/bin:$PATH
-```
+{% endhighlight %}
 
 Save that and open a new terminal to apply changes. Check you PATH:
-```shell
+{% highlight sh %}
 $ echo $PATH
 /nosql/hive/apache-hive-2.0.0-bin/bin:/nosql/hadoop/hadoop-2.7.2/bin:/nosql/spark/spark-1.6.1-bin-without-hadoop/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:
-```
+{% endhighlight %}
 
 Despite these are permanent settings, when we run the any of the tools, they look into *<tool>-env.sh* conf file to apply any settings. You want to make sure you have the following:  
-```shell
+{% highlight sh %}
 $ vi ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 export PATH=${JAVA_HOME}/bin:${PATH}
@@ -197,7 +198,7 @@ vi ${HIVE_HOME}/conf/spark-env.sh
 export HADOOP_HOME=/nosql/hadoop/hadoop-2.7.2  # Hive uses Hadoop common libraries
 export HIVE_HOME=/nosql/hive/apache-hive-2.0.0-bin
 export PATH=$HIVE_HOME/bin:$PATH
-```
+{% endhighlight %}
 
 Note that SparkSQL, despite being a separate tool, comes within the basic Spark distribution and thus everything is already set (almost - we would need to compile it with the specific jars to support, say, the interaction with Hive, but we won't do that).
 
@@ -216,7 +217,7 @@ Also you can jump straight to [Visual Demo of LWR Prediction](#demo)
 
 ##### MapReduce Streaming API Implementation
 Let us briefly review our implementation (full code available at [project's github](https://github.com/alexsalo/nosql-locally-weighted-regression)). Mapper:
-```python
+{% highlight python %}
 def gauss_kernel(x_to, c):
     d = x_query - x_to
     d_sq = d * d.T
@@ -239,10 +240,10 @@ for line in sys.stdin:
 # emit partial resulting martricies A and B into STDOUT
 print '%s\t%s' % ('a', mat2str(a))
 print '%s\t%s' % ('b', mat2str(b))
-```
+{% endhighlight %}
 
 Reducer:
-```python
+{% highlight python %}
 # sum A and b matricies received from mapper
 for line in sys.stdin:
     # parse <key, value> from STDIN
@@ -257,80 +258,80 @@ for line in sys.stdin:
 # emit full matricies A and B to STDOUT (saved into HDFS)
 print '%s' % (mat2str(a))
 print '%s' % (mat2str(b))
-```
+{% endhighlight %}
 
 Time to execute! All the following commands are issued from the */nosql/hadoop/* on the virtual machine under root privileges:
-```shell
+{% highlight sh %}
 $ sudo su            # password: bigdata
 $ cd /nosql/hadoop/  # which has hadoop installation hadoop-2.7.2/
-```
+{% endhighlight %}
 
 #### <a id="linux-pipes"></a> 1. Linux Pipes for Development/Testing
 While each step could be separated, ultimately we want to chain *input -> mapper -> reducer -> find_theta:*
 
 First, let's run mapper and reducer on the input files:
-```shell
+{% highlight sh %}
 $ cat /nosql/input/* | /nosql/hadoop/lwr_mapreduce_mapper.py | /nosql/hadoop/lwr_mapreduce_reducer.py
-```
+{% endhighlight %}
 Which produces the following output:
-```shell
+{% highlight sh %}
 0.04429884,-0.25175942,0.40566047,-0.01703711;-0.25175942,1.43521279,-2.30624365,0.09647099;0.40566047,-2.30624365,3.71557318,-0.15618137;-0.01703711,0.09647099,-0.15618137,0.00681046
 -0.26564261;1.51042747;-2.43520908;0.10292634
-```
+{% endhighlight %}
 These are two lines, each containing numpy arrays encoded for IO via *np_matrix_helpers.py*. First line is a matrix **A (n x n)**; second line is a matrix **B (n x 1)**.
 
 With Linux pipes we can directly feed these matricies to *find_theta.py* script to make a hypothesis:
-```shell
+{% highlight sh %}
 $ cat /nosql/input/* | /nosql/hadoop/lwr_mapreduce_mapper.py |
 /nosql/hadoop/lwr_mapreduce_reducer.py | /nosql/hadoop/lwr_mapreduce_find_theta.py
-```
+{% endhighlight %}
 Which produces the hypothesis that we were looking for:
-```shell
+{% highlight sh %}
 [[ 26.89559418]
  [ -0.58025811]
  [ -3.96902175]
  [ -0.40520663]]
-```
+{% endhighlight %}
 
 #### <a id="hadoop-single"></a> 2. Hadoop single node without HDFS
 *--You can skip this part if you are not developing new functionality--*
 
 First, make sure single node mode is activated. Edit the following two files and leave empty configuration tags:
-```shell
+{% highlight sh %}
 $ vi hadoop-2.7.2/etc/hadoop/core-site.xml hdfs-site.xml
 # <configuration>
 # </configuration>
-```
+{% endhighlight %}
 
 Then let's remove an output folder from the previous run (otherwise you'll see error):
-```shell
+{% highlight sh %}
 $ rm -r mapreduce_output
-```
+{% endhighlight %}
 
 Now we can run MapReduce. Don't forget to include streaming API jar:
-```shell
+{% highlight sh %}
 $ hadoop jar hadoop-2.7.2/share/hadoop/tools/lib/hadoop-streaming-2.7.2.jar \
 -mapper lwr_mapreduce_mapper.py \
 -reducer lwr_mapreduce_reducer.py \
 -input /nosql/input/* \
 -output output
-```
+{% endhighlight %}
 That produces two lines with matricies **A** and **B**, just as our Linux pipes example did (we will take a closer look at MapReduce log info in the next part). To make a hypothesis do:
 
-```shell
+{% highlight sh %}
 cat output/* | /nosql/hadoop/lwr_mapreduce_find_theta.py
-```
+{% endhighlight %}
 Which again produces the hypothesis:
-```shell
+{% highlight sh %}
 [[ 26.89559418]
  [ -0.58025811]
  [ -3.96902175]
  [ -0.40520663]]
-```
+{% endhighlight %}
 
 #### <a id="pseudo-distributed"></a> 3. Hadoop in Pseudo-Distributed Mode with HDFS Running
 Now that the trials of dev and tests are finished, let's run a full deal. First, make sure pseudo-distributed mode is activated. Edit the following two files and add the following configuration tags:
-```shell
+{% highlight sh %}
 $ vi hadoop-2.7.2/etc/hadoop/core-site.xml
 # <configuration>
 #     <property>
@@ -346,42 +347,42 @@ $ vi hadoop-2.7.2/etc/hadoop/hdfs-site.xml
 #         <value>1</value>
 #     </property>
 # </configuration>
-```
+{% endhighlight %}
 
 Then format HDFS:
-```shell
+{% highlight sh %}
 $ hdfs namenode -format
-```
+{% endhighlight %}
 
 Start NameNode and DataNode daemons:
-```shell
+{% highlight sh %}
 $ hadoop-2.7.2/sbin/start-dfs.sh
-```
+{% endhighlight %}
 
 Check that HDFS has the following directories by browsing http://localhost:50070/. If not present - create them:
-```shell
+{% highlight sh %}
 $ hdfs dfs -mkdir /user
 $ hdfs dfs -mkdir /user/root  # should be the same username as in your vm
 $ hdfs dfs -mkdir /user/root/input
-```
+{% endhighlight %}
 
 Put input file(s) from local path into HDFS path. Note that (given our test data size is relatively small) in order to make more mappers we want to make more data splits, which is naturally achieved by dividing data file into several files. In our case we simply copy the same data file several times.
-```shell
+{% highlight sh %}
 $ hdfs dfs -put /nosql/input/* /user/root/input/
-```
+{% endhighlight %}
 
 Now that the preparation is done we can actually run our executable python scripts as a MapReduce jobs (make sure you removed the output folder if you run second time):
-```shell
+{% highlight sh %}
 $ hdfs dfs -rm /user/root/mapreduce_output
 $ hadoop jar hadoop-2.7.2/share/hadoop/tools/lib/hadoop-streaming-2.7.2.jar \
 -mapper lwr_mapreduce_mapper.py \
 -reducer lwr_mapreduce_reducer.py \
 -input /user/root/input/* \
 -output /user/root/mapreduce_output
-```
+{% endhighlight %}
 
 Note the following in the MapReduce log info:
-```shell
+{% highlight sh %}
 ...
 16/04/26 11:14:25 INFO mapred.FileInputFormat: Total input paths to process : 4
 16/04/26 11:14:25 INFO mapreduce.JobSubmitter: number of splits:4
@@ -395,36 +396,36 @@ Map-Reduce Framework
     ...
 		Reduce input records=8
 		Reduce output records=2
-```
+{% endhighlight %}
 MapReduce framework decide number of splits over the input data based on the split_size, determined as *split_size = max(minimumSize, min(maximumSize, blockSize))*. Additionally, it naturally "splits" the separate files. We took advantage of the latter to force 4 splits, which produced 8 map output records (4 of each partially summed matricies A and B). Then framework shuffled and sorted map output records and reduced by key into 2 output records (fully summed A and B). That is the output that we save on HDFS /mapreduce_output.
 
 Now we can cat resulted matricies in HDFS and calculate thetas what we were looking for:
-```shell
+{% highlight sh %}
 $ hdfs dfs -cat /user/root/mapreduce_output/* | /nosql/hadoop/lwr_mapreduce_find_theta.py
-```
+{% endhighlight %}
 
 Which again produces the correct hypothesis &theta;:
-```shell
+{% highlight sh %}
 [[ 26.89559418]
  [ -0.58025811]
  [ -3.96902175]
  [ -0.40520663]]
-```
+{% endhighlight %}
 
 ####  <a id="demo"></a> Visual Demo of LWR Prediction
 This tutorial comes with a demo. Run the following script to visually confirm LWR prediction, which takes into account the locality of the x_query (unlike simple linear regression):
-```shell
+{% highlight sh %}
 $ hdfs dfs -cat /user/root/mapreduce_output/* | /nosql/hadoop/lwr_plot_x_query.py
-```
+{% endhighlight %}
 
 This should produce a picture like that:
 [![Demo]({{site.url }}/images/lwr_demo.png)]({{ site.url }}/images/lwr_demo.png)
 
 
 To finish up - shut down the daemons:
-```shell
+{% highlight sh %}
 $ hadoop-2.7.2/sbin/stop-dfs.sh
-```
+{% endhighlight %}
 
 ##### A Note on Scalability
 Provided algorithm scales efficiently as the data volume growth. With N nodes in the system, the HDFS distributes the large file over all these N nodes. When you start a job, there will be N mappers by default (in our case of small data split into four files there are four mappers by default). Hadoop makes sure the mapper on a machine will process the part of the data that is stored on this node, which is called Rack awareness.
@@ -438,18 +439,18 @@ While MapReduce provides a fine grain way to write our own mappers and reducers 
 Spark revolves around the concept of a resilient distributed dataset (RDD), which is a fault-tolerant collection of elements that can be operated on in parallel. For this tutorial we need HDFS to be already set and running; HDFS should contain /user/root/input folder with data files. Please refer to the README in /nosql/hadoop folder on how to set it up.
 
 All the following commands are issued from the *spark* working directory on the virtual machine under root privileges:
-```shell
+{% highlight sh %}
 $ sudo su           # password: bigdata
 $ cd /nosql/spark/  # which has spark installation spark-1.6.1-bin-without-hadoop/
-```
+{% endhighlight %}
 
 Then start Spark cluster (then check http://localhost:8080/):
-```shell
+{% highlight sh %}
 $ /nosql/spark/spark-1.6.1-bin-without-hadoop/sbin/start-all.sh
-```
+{% endhighlight %}
 
 With Spark, we can access files in both local FS and the HDFS:
-```shell
+{% highlight sh %}
 $ pyspark
 # Open Local File in FS
 localFile = sc.textFile("file:///nosql/input/x_data.txt")
@@ -460,7 +461,7 @@ localFile.count()
 hdfsFile = sc.textFile("/user/root/input/*.txt")
 hdfsFile.count()
 # 5488
-```
+{% endhighlight %}
 
 The major benefit of Spark over plain MapReduce is that it provides an consolidated API in Java, Scala or Python. From the [Spark Programming Guide](http://spark.apache.org/docs/latest/programming-guide.html)
 > For example, map is a transformation that passes each dataset element through a function and returns a new RDD representing the results. On the other hand, reduce is an action that aggregates all the elements of the RDD using some function and returns the final result to the driver program.
@@ -470,7 +471,7 @@ That means we still use the same idea of mapper and reducer here. However the be
 
 So what we have to change in our LWR scripts? Not much. Basically, we simply make a functions out of the mapper and reducer and pass into Spark to run. Below is a simplified implementation (full code available at [project's github](https://github.com/alexsalo/nosql-locally-weighted-regression)):
 
-```python
+{% highlight python %}
 sc = SparkContext('local', 'spark app')
 data = sc.textFile('/user/root/input/x_data*.txt')
 
@@ -498,15 +499,15 @@ theta = a.I * b  # we found our LWR hypothesis!
 
 # Save result into HDFS
 sc.parallelize(theta).saveAsTextFile('/user/root/spark_output')
-```
+{% endhighlight %}
 
 Note that we didn't even have to write a custom reducer since all it does is it sums the Numpy matricies - easily done with simple lambda expression. To execute the full script:
-```shell
+{% highlight sh %}
 spark-submit --master local[4] /nosql/spark/lwr_spark.py
-```
+{% endhighlight %}
 
 Let us check what we've got and compare with the MapReduce output:
-```shell
+{% highlight sh %}
 # Show hypothesis produced by Hadoop MapReduce
 $ hdfs dfs -cat /user/root/mapreduce_output/* | /nosql/hadoop/lwr_mapreduce_find_theta.py
 # [[ 26.89715476]
@@ -520,7 +521,7 @@ $ hdfs dfs -cat /user/root/spark_output/*
 # [[-0.57996902]]
 # [[-3.96718554]]
 # [[-0.40413609]]
-```
+{% endhighlight %}
 Thus we obtained the same results. Note, however, that in Spark we pass mapper and reducer as a function (or lambda expression) within single python script and thus able to find hypothesis theta right away, while in MapReduce we have to read the output of the reducers and apply our *find_theta* routine.
 
 Another benefit (probably more important one) is in **native support** of python in Spark, which means that we can operate over language objects rather than pure strings. In our case, in MapReduce we had to communicate our partial matricies via standard input/output by converting and parsing np.maprix class into the string, which incurred additional time consumed and created a space for to err. In Spark, however, we don't have to do that anymore: we simply pass objects of np.maprix class from one RDD to another, and that is truly advantageous.
@@ -533,22 +534,22 @@ Spark proven to be more flexible tool for executing functions on the distributed
 Recall that HIVE provides data warehousing facilities on top of an existing Hadoop cluster. We can create tables in Hive and store and data there. Hive also provide HQL, very familiar to SQL in syntax, to query our data.
 
 To begin with, we need to create some service directories with privileges in HDFS for Hive to use:
-```shell
+{% highlight sh %}
 $ hdfs dfs -mkdir     /tmp
 $ hdfs dfs -chmod g+w /tmp
 $ hdfs dfs -mkdir     /user/hive
 $ hdfs dfs -mkdir     /user/hive/warehouse
 $ hdfs dfs -chmod g+w /user/hive/warehouse  # give privileges to hive's warehouse directory
-```
+{% endhighlight %}
 
 As usual, all the following commands are issued from the *hive* working directory on the virtual machine under root privileges:
-```shell
+{% highlight sh %}
 $ sudo su           # password: bigdata
 $ cd /nosql/hive/   # which has spark installation apache-hive-2.0.0-bin/
-```
+{% endhighlight %}
 
 Hive stores its metadata in a RDBMS of choice (derby|mysql|postgres|oracle). Thus we need to remove previous (meta) data store and init a new one (with provided 'derby' engine):
-```shell
+{% highlight sh %}
 $ cd apache-hive-2.0.0-bin/
 $ rm -Rf metastore_db
 $ schematool -initSchema -dbType derby
@@ -556,10 +557,10 @@ $ schematool -initSchema -dbType derby
 # (Optional) in case of abnormal exit (i.e. Ctrl+Z) you will see a bunch of exceptions,
 # so you can try simply removing the lock.
 $ rm metastore_db/*.lck  
-```
+{% endhighlight %}
 
 Now we can create a table (stored in HDFS) in Hive that will suit our data_x.txt file. Note however, that the default field terminator in Hive is **\\t**, but our file is **','** delimited. Thus we need to explicitly put statement to use a different field separator:
-```shell
+{% highlight sh %}
 $ beeline -u jdbc:hive2://  # connect to Hive
 
 # 0: jdbc:hive2://>
@@ -571,23 +572,23 @@ SHOW TABLES;
 # +-----------+--+
 # | lwr_data  |
 # +-----------+--+
-```
+{% endhighlight %}
 
 Now we can load the data into the table from either local store or from HDFS file. Let us do HDFS. As noted in the documentation:
 > Note that loading data from HDFS will result in **moving the file/directory**. As a result, the operation is *almost instantaneous*.
 
 Thus to load, we first need to create a new redundant copies of input files:
-```shell
+{% highlight sh %}
 # In a new terminal:
 $ sudo su
 $ hdfs dfs -mkdir /user/hive/input  # make input dir for hive
 
 # copy files from local file system
 $ hdfs dfs -put /nosql/input/* /user/hive/input  
-```
+{% endhighlight %}
 
 And then load them (or, rather, move and apply schema) into the DBMS (note that we can apply basic filter to select *all the files* in the input directory):
-```shell
+{% highlight sh %}
 LOAD DATA INPATH '/user/hive/input/*' INTO TABLE lwr_data;
 
 # Try some SQL-like query
@@ -600,9 +601,9 @@ SELECT * FROM lwr_data WHERE x1 > 4 AND x2 < -3 LIMIT 3;
 # | 4.3239       | -4.8835      | 3.4356       | -0.5776      |
 # +--------------+--------------+--------------+--------------+--+
 # 3 rows selected (0.19 seconds)
-```
+{% endhighlight %}
 After LOAD command you can confirm that the files are all gone from /user/hive/input directory. We can also confirm that all data rows are stored by running HQL:
-```shell
+{% highlight sh %}
 SELECT COUNT(*) from lwr_data;
 # ...
 # +-------+--+
@@ -610,18 +611,18 @@ SELECT COUNT(*) from lwr_data;
 # +-------+--+
 # | 5488  |
 # +-------+--+
-```
+{% endhighlight %}
 Interestingly enough, initially Hive was supposed to run all the selection queries as a MapReduce jobs under the hood. Thus when do *SELECT COUNT(\*)* we see the MapReduce output information, along with the following warning:
 > WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. tez, spark) or using Hive 1.X releases.
 
 Since running on Spark execution engine should not affect out implementation, let us create an HQL user defined function (UDF), which will be analogous to our mapper to produce intermediate results (matricies A and B). First, and this already feels like ad-hoc, we probably need to create an intermediate table to store the mapper's output:
-```shell
+{% highlight sh %}
 CREATE TABLE ab_mat (a STRING, b STRING);
-```
+{% endhighlight %}
 
 Now let us take a look at the simplified code of the Hive mapper (full code available at [project's github](https://github.com/alexsalo/nosql-locally-weighted-regression)):
 
-```python
+{% highlight python %}
 def gauss_kernel(x_to, c): ...
 def mat2str(mat): ...
 
@@ -638,26 +639,26 @@ for line in sys.stdin:
 
 # emit partial resulting martricies A and B into STDOUT
 print '%s\t%s' % (mat2str(a), mat2str(b))
-```
+{% endhighlight %}
 
 Note that it basically the same as a mapper for MapReduce (converts rows into A and B matricies), except it has different delimiter for fields.
 
 Now add that python mapper into Hive context:
-```shell
+{% highlight sh %}
 add FILE /nosql/hive/lwr_hive_mapper.py;  # replaces old version
 # Added resources: [/nosql/hive/hive_mapper.py]
-```
+{% endhighlight %}
 Then, we can query our original data (with any WHERE or other clauses we want - but we won't do that so we could compare the results), transform it using our mapper, and load into newly create intermediate table:
-```shell
+{% highlight sh %}
 INSERT OVERWRITE TABLE ab_mat
   SELECT TRANSFORM (x1, x2, x3, x4)
   USING 'python lwr_hive_mapper.py'
   AS (a, b)
   FROM lwr_data;
-```
+{% endhighlight %}
 
 Finally, we can select all A and B matricies and pass them to another mapper (lwr_hive_find_theta.py) that will compute hypothesis theta.  
-```shell
+{% highlight sh %}
 add FILE /nosql/hive/lwr_hive_find_theta.py;
 SELECT
   TRANSFORM (a, b)
@@ -670,14 +671,14 @@ FROM ab_mat;
 # | 26.87052487  | -0.579815330225  | -3.96594330195  | -0.403622196259  |
 # +--------------+------------------+-----------------+------------------+--+
 # 1 row selected (1.32 seconds)
-```
+{% endhighlight %}
 
 Thus we arrived at the same results as when using MapReduce or Spark, but this time using HQL as a tool for processing data stored in Hive warehouse on top of HDFS.
 
 Last thing: quit Hive2 (beeline) correctly to avoid problems with the metastore:
-```shell
+{% highlight sh %}
 !quit
-```
+{% endhighlight %}
 
 ##### Hive Summary
 Hive proven to be easy-to-use and SQL-like tool for dealing with distributed data on HDFS. It is probably advantageous when the users are very confident SQL masters but poor programmers. However, for problems like LWR in Hive one needs a *custom (user defined) queries (UDF)*. But in general, since we assume our users are not good programmers, the benefit of Hive become less apparent.
@@ -697,23 +698,23 @@ When working with HIVE we liked the universality of HQL, which allowed us famili
 Working with HIVE is rather straightforward, but requires to build Spark with related flags (Hive support leads to increase in the number of external dependencies). Thus let's test yet another feature of SparkSQL: inferring JSON format by reflection and automatic conversion of JSON to an SQL-like table. Then we can query that table and calculate LWR. That sounds like a  reasonable idea - suppose we receive data from our business client in JSON format every night.
 
 As usual, all the following commands are issued from the *sparksql* working directory on the virtual machine under root privileges:
-```shell
+{% highlight sh %}
 $ sudo su               # password: bigdata
 $ cd /nosql/sparksql/   
-```
+{% endhighlight %}
 
 First, let's generate some JSON data. Just feed data_x.txt to our conversion script:
-```shell
+{% highlight sh %}
 $ cat /nosql/input/* | /nosql/sparksql/csv-to-json.py
-```
+{% endhighlight %}
 
 Now put generated JSON into HDFS:
-```shell
+{% highlight sh %}
 $ hdfs dfs -put /nosql/sparksql/data_x.json /user/root/
-```
+{% endhighlight %}
 
 We can now register that file as if a table to query as we like:
-```shell
+{% highlight sh %}
 $ pyspark
 lwr_data = sqlContext.read.json('/user/root/data_x.json')
 lwr_data.registerTempTable('lwr_data')
@@ -726,10 +727,10 @@ sqlContext.sql('SELECT * FROM lwr_data WHERE x1 > 4 AND x2 < -3 LIMIT 3').show()
 |4.3684| 9.6718|-3.9606|-3.1625|
 |5.2423|11.0272| -4.353|-4.1013|
 +------+-------+-------+-------+
-```
+{% endhighlight %}
 Thus we get the same functionality as with HIVE yet we don't have to describe the structure - it is inferred automatically! Better yet, the result of any query is, in fact, RDD, which supports all the normal RDD operations. Thus we can seamlessly combine the syntax of the two:
 
-```shell
+{% highlight sh %}
 df = sqlContext.sql('SELECT * FROM lwr_data WHERE x1 > 4 AND x2 < -3')
 df.count()
 # 528
@@ -737,12 +738,12 @@ df.count()
 # Try arbitrary map and reduce over our DataFrame obtained from temp table over JSON:
 df.map(lambda row: abs(row.x1 + row.x2 - row.x3)).reduce(lambda a, b: a + b)
 # 4646.904679999999
-```
+{% endhighlight %}
 
 This is very elegant and powerful. Also note that we can use up-down keystokes to repeat recent operations (which you can't do in HIVE).
 
 Implementation of our LWR is rather straightforward - all we need to do is to adjust our MapAB function to work with rows rather than the string line. Below is simplified code (full code available at [project's github](https://github.com/alexsalo/nosql-locally-weighted-regression)):
-```python
+{% highlight python %}
 sc = SparkContext('local', 'spark sql app')
 sqlContext = SQLContext(sc)
 
@@ -773,20 +774,20 @@ theta = a.I * b  # we found our LWR hypothesis!
 
 # Save result into HDFS
 sc.parallelize(theta).saveAsTextFile('/user/root/sparksql_output')
-```
+{% endhighlight %}
 To execute the full script:
-```shell
+{% highlight sh %}
 spark-submit --master local[4] /nosql/sparksql/lwr_sparksql.py
-```
+{% endhighlight %}
 
 Check the correctness of the hypothesis produced by SparkSQL:
-```shell
+{% highlight sh %}
 $ hdfs dfs -cat /user/root/sparksql_output/*
 # [[ 26.88083126]]
 # [[-0.57996902]]
 # [[-3.96718554]]
 # [[-0.40413609]]
-```
+{% endhighlight %}
 
 ##### SparkSQL Summary
 While JSON reflection is super useful it doesn't appear to be robust yet (I failed to parse my Google takeout data). In spite of that, SparkSQL proven to be an extremely nice and easy to use tool. While calculating LWR in SQL worlds appears to be a bad idea (since the whole point of SQL is to allow to run 'mainstream' queries on data, while LWR requires us to write a custom script) SparkSQL allows us to soften the edge here by fusing the SQL like functionality with robust RDD features and convenient DataFrame API.
