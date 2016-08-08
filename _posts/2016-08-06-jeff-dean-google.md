@@ -3,15 +3,15 @@ layout: post
 tags: [cs, humor]
 title: Jeff Dean of Google
 ---
-I have never heard of Jeff before, today I've heard he is like a star, and now I can see why. Below is the list of things known to be true about Jeff (copied from Evan Putra Limanto answer on [Qoura](https://www.quora.com/What-are-all-the-Jeff-Dean-facts))
+I have never heard of Jeff before, today I've heard he is like a star, and now I can see why. Below is the list of things known to be true about Jeff (copied from Evan Putra Limanto answer on [Quora](https://www.quora.com/What-are-all-the-Jeff-Dean-facts))
 
 * Jeff Dean proved that P=NP when he solved all NP problems in polynomial time on a whiteboard.
 * Jeff Dean's PIN is the last 4 digits of pi.
 * When Jeff gives a seminar at Stanford, it's so crowded Don Knuth has to sit on the floor. (TRUE)
 * Jeff Dean once bit a spider, the spider got super powers and C readability
 * Once, in early 2002, when the index servers went down, Jeff Dean answered user queries manually for two hours. Evals showed a quality improvement of 5 points.
-*
-* <!--cut-->
+
+<!--cut-->
 * Jeff Dean got promoted to level 11 in a system where max level is 10. (True.)
 * Google Search was Jeff Dean's Noogler Project
 * Jeff Dean has punch card readability.
