@@ -10,8 +10,8 @@ I have never heard of Jeff before, today I've heard he is like a star, and now I
 * When Jeff gives a seminar at Stanford, it's so crowded Don Knuth has to sit on the floor. (TRUE)
 * Jeff Dean once bit a spider, the spider got super powers and C readability
 * Once, in early 2002, when the index servers went down, Jeff Dean answered user queries manually for two hours. Evals showed a quality improvement of 5 points.
-*
-* <!--cut-->
+
+<!--cut-->
 * Jeff Dean got promoted to level 11 in a system where max level is 10. (True.)
 * Google Search was Jeff Dean's Noogler Project
 * Jeff Dean has punch card readability.
