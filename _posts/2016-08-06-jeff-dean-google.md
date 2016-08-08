@@ -3,7 +3,7 @@ layout: post
 tags: [cs, humor]
 title: Jeff Dean of Google
 ---
-I have never heard of Jeff before, today I've heard he is like a star, and now I can see why. Below is the list of things known to be true about Jeff (copied from Evan Putra Limanto answer on [Qoura](https://www.quora.com/What-are-all-the-Jeff-Dean-facts))
+I have never heard of Jeff before, today I've heard he is like a star, and now I can see why. Below is the list of things known to be true about Jeff (copied from Evan Putra Limanto answer on [Quora](https://www.quora.com/What-are-all-the-Jeff-Dean-facts))
 
 * Jeff Dean proved that P=NP when he solved all NP problems in polynomial time on a whiteboard.
 * Jeff Dean's PIN is the last 4 digits of pi.
