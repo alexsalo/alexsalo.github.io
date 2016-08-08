@@ -1,10 +1,10 @@
 ---
-* layout: post
-* tags: [cs, humor]
-* title: Jeff Dean of Google
-* ---
-* I have never heard of Jeff before, today I've heard he is like a star, and now I can see why. Below is the list of things known to be true about Jeff (copied from Evan Putra Limanto answer on [Qoura](https://www.quora.com/What-are-all-the-Jeff-Dean-facts))
-*
+layout: post
+tags: [cs, humor]
+title: Jeff Dean of Google
+---
+I have never heard of Jeff before, today I've heard he is like a star, and now I can see why. Below is the list of things known to be true about Jeff (copied from Evan Putra Limanto answer on [Qoura](https://www.quora.com/What-are-all-the-Jeff-Dean-facts))
+
 * Jeff Dean proved that P=NP when he solved all NP problems in polynomial time on a whiteboard.
 * Jeff Dean's PIN is the last 4 digits of pi.
 * When Jeff gives a seminar at Stanford, it's so crowded Don Knuth has to sit on the floor. (TRUE)
@@ -96,4 +96,3 @@
 * The OR ELSE construct had to be removed from ISO C after Jeff Dean used it in Mustang and kernels started panicking in terror.
 * Jeff Dean is not afraid of evil constructors. They are afraid of him.
 * Jeff Dean doesn't write bugs, just features you are unable to understand.
-*
